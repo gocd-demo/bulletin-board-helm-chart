@@ -6,4 +6,4 @@ This chart installs the bulletin board sample application. It's intended use is 
 
 #Usage
 
-helm install --set image.repository=<image name> --set image.tag=<image tag>  bulletin-board
+helm install --set image.repository=<image name> --set image.tag=<image tag>  bulletin-board-helm-chart
