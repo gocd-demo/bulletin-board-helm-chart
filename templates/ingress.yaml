@@ -1,0 +1,22 @@
+{{- if .Values.ingress.enabled -}}
+{{- $fullName := include "bulletin-board-helm-chart.fullname" . -}}
+{{- $ingressPath := .Values.ingress.path -}}
+{{- $servicePort := .Values.service.port -}}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ $fullName }}
+  labels:
+    app: {{ include "bulletin-board-helm-chart.name" . }}
+    chart: {{ include "bulletin-board-helm-chart.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+{{- with .Values.ingress.annotations }}
+  annotations:
+{{ toYaml . | indent 4 }}
+{{- end }}
+spec:
+  backend:
+    serviceName: {{ $fullName }}
+    servicePort: {{ $servicePort }}
+{{- end }}
